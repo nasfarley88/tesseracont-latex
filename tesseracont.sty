@@ -1,0 +1,80 @@
+%%
+%% This is file `tesseracont.sty',
+%% generated with the docstrip utility.
+%%
+%% The original source files were:
+%%
+%% tesseracont.dtx  (with options: `package')
+%% -----------:| -------------------------------------------------------------
+%% tesseracont:| A new LaTeX package
+%%      Author:| Nathanael Farley
+%%      E-mail:| nasfarley88@gmail.com
+%%     License:| Released under the LaTeX Project Public License v1.3c or later
+%%         See:| http://www.latex-project.org/lppl.txt
+%% 
+\NeedsTeXFormat{LaTeX2e}[1999/12/01]
+\ProvidesPackage{tesseracont}
+    [2018/02/18 v1.00 A new LaTeX package]
+\RequirePackage{xparse}
+\RequirePackage{tikz}
+\tikzset{
+  pics/carc/.style args={#1:#2:#3}{
+    code={
+      \draw[pic actions] (#1:#3) arc(#1:#2:#3);
+    }
+  }
+}
+\def\tesseracont@dodec#1{{90+(30*(#1-1)}}
+\NewDocumentCommand{\tesseracont@one}{}{%
+  \draw[white] (0,0) circle (0pt) pic[black]{%
+    carc=\tesseracont@dodec{2}:\tesseracont@dodec{7}:6pt};%
+  \draw[white] (0,0) circle (0pt) pic[black,line width={6pt*0.2}]{%
+    carc=\tesseracont@dodec{2}:\tesseracont@dodec{4}:{6pt*0.9}};%
+}
+\NewDocumentCommand{\tesseracont@two}{}{%
+  \draw[white] (0,0) circle (0pt) pic[black]{carc=\tesseracont@dodec{7}:\tesseracont@dodec{2+12}:{6pt*0.5}};
+  \draw[white] (0,0) circle (0pt) pic[black,line width={6pt*0.2}]{carc=\tesseracont@dodec{7}:\tesseracont@dodec{10}:{6pt*0.4}};
+}
+\NewDocumentCommand{\tesseracont@three}{}{%
+  \draw[white] (0,0) circle (0pt) pic[black]{carc=\tesseracont@dodec{3}:\tesseracont@dodec{11}:6pt};
+  \draw[white] (0,0) circle (0pt) pic[black,line width={6pt*0.2}]{carc=\tesseracont@dodec{3}:\tesseracont@dodec{6}:{6pt*0.9}};
+  \draw[white] (0,0) circle (0pt) pic[black,line width={6pt*0.2}]{carc=\tesseracont@dodec{8}:\tesseracont@dodec{11}:{6pt*0.9}};
+}
+\NewDocumentCommand{\tesseracont@four}{}{
+  \draw[white] (0,0) circle (0pt) pic[black]{carc=\tesseracont@dodec{8}:\tesseracont@dodec{6+12}:6pt};
+  \draw[white] (0,0) circle (0pt) pic[black,line width={6pt*0.2}]{carc=\tesseracont@dodec{0}:\tesseracont@dodec{2}:{6pt*0.9}};
+}
+\NewDocumentCommand{\tesseracont@five}{}{
+  \draw[black] (0,0) circle ({6pt*0.5});
+}
+\NewDocumentCommand{\tesseracont@ten}{}{
+  \draw[white] (0,0) circle (0pt) pic[black]{carc=\tesseracont@dodec{2}:\tesseracont@dodec{8}:6pt};
+  \draw[black] (0,0) -- ++(\tesseracont@dodec{2}:6pt);
+}
+\NewDocumentCommand{\tesseracont@fifteen}{}{
+  \draw[white] (0,0) circle (0pt) pic[black]{carc=0:180:6pt};
+  \draw[black] ({6pt*0.3},0) -- ++(0:{6pt*0.7});
+}
+\newenvironment{dummyEnv}{%
+}{%
+}
+%% 
+%% Copyright (C) 2018 by Nathanael Farley <nasfarley88@gmail.com>
+%% 
+%% This work may be distributed and/or modified under the
+%% conditions of the LaTeX Project Public License (LPPL), either
+%% version 1.3c of this license or (at your option) any later
+%% version.  The latest version of this license is in the file:
+%% 
+%% http://www.latex-project.org/lppl.txt
+%% 
+%% This work is "maintained" (as per LPPL maintenance status) by
+%% Nathanael Farley.
+%% 
+%% This work consists of the file tesseracont.dtx and a Makefile.
+%% Running "make" generates the derived files README, tesseracont.pdf and tesseracont.sty.
+%% Running "make inst" installs the files in the user's TeX tree.
+%% Running "make install" installs the files in the local TeX tree.
+%% 
+%%
+%% End of file `tesseracont.sty'.

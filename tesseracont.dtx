@@ -1,0 +1,239 @@
+% \iffalse meta-comment
+% vim: textwidth=75
+%<*internal>
+\iffalse
+%</internal>
+%<*readme>
+|
+-----------:| -------------------------------------------------------------
+tesseracont:| A new LaTeX package
+     Author:| Nathanael Farley
+     E-mail:| nasfarley88@gmail.com
+    License:| Released under the LaTeX Project Public License v1.3c or later
+        See:| http://www.latex-project.org/lppl.txt
+
+
+Short description:
+A LaTeX package for tesseracont: a number system by Kristian Zarebski (reproduced with permission)
+%</readme>
+%<*internal>
+\fi
+\def\nameofplainTeX{plain}
+\ifx\fmtname\nameofplainTeX\else
+  \expandafter\begingroup
+\fi
+%</internal>
+%<*install>
+\input docstrip.tex
+\keepsilent
+\askforoverwritefalse
+\preamble
+-----------:| -------------------------------------------------------------
+tesseracont:| A new LaTeX package
+     Author:| Nathanael Farley
+     E-mail:| nasfarley88@gmail.com
+    License:| Released under the LaTeX Project Public License v1.3c or later
+        See:| http://www.latex-project.org/lppl.txt
+
+\endpreamble
+\postamble
+
+Copyright (C) 2018 by Nathanael Farley <nasfarley88@gmail.com>
+
+This work may be distributed and/or modified under the
+conditions of the LaTeX Project Public License (LPPL), either
+version 1.3c of this license or (at your option) any later
+version.  The latest version of this license is in the file:
+
+http://www.latex-project.org/lppl.txt
+
+This work is "maintained" (as per LPPL maintenance status) by
+Nathanael Farley.
+
+This work consists of the file tesseracont.dtx and a Makefile.
+Running "make" generates the derived files README, tesseracont.pdf and tesseracont.sty.
+Running "make inst" installs the files in the user's TeX tree.
+Running "make install" installs the files in the local TeX tree.
+
+\endpostamble
+
+\usedir{tex/latex/tesseracont}
+\generate{
+  \file{\jobname.sty}{\from{\jobname.dtx}{package}}
+}
+%</install>
+%<install>\endbatchfile
+%<*internal>
+\usedir{source/latex/tesseracont}
+\generate{
+  \file{\jobname.ins}{\from{\jobname.dtx}{install}}
+}
+\nopreamble\nopostamble
+\usedir{doc/latex/tesseracont}
+\generate{
+  \file{README.txt}{\from{\jobname.dtx}{readme}}
+}
+\ifx\fmtname\nameofplainTeX
+  \expandafter\endbatchfile
+\else
+  \expandafter\endgroup
+\fi
+%</internal>
+% \fi
+%
+% \iffalse
+%<*driver>
+\ProvidesFile{tesseracont.dtx}
+%</driver>
+%<package>\NeedsTeXFormat{LaTeX2e}[1999/12/01]
+%<package>\ProvidesPackage{tesseracont}
+%<*package>
+    [2018/02/18 v1.00 A new LaTeX package]
+%</package>
+%<*driver>
+\documentclass{ltxdoc}
+\usepackage[a4paper,margin=25mm,left=50mm,nohead]{geometry}
+\usepackage[numbered]{hypdoc}
+\usepackage{\jobname}
+\EnableCrossrefs
+\CodelineIndex
+\RecordChanges
+\begin{document}
+  \DocInput{\jobname.dtx}
+\end{document}
+%</driver>
+% \fi
+%
+% \GetFileInfo{\jobname.dtx}
+% \DoNotIndex{\newcommand,\newenvironment}
+%
+%\title{\textsf{tesseracont} --- A new LaTeX package\thanks{This file
+%   describes version \fileversion, last revised \filedate.}
+%}
+%\author{Nathanael Farley\thanks{E-mail: nasfarley88@gmail.com}}
+%\date{Released \filedate}
+%
+%\maketitle
+%
+%\changes{v1.00}{2018/02/18}{First public release}
+%
+% \begin{abstract}
+% ==== Put abstract text here. ====
+% \end{abstract}
+%
+% \section{Usage}
+%
+% ==== Put descriptive text here. ====
+%
+% \DescribeMacro{\dummyMacro}
+% This macro does nothing.\index{doing nothing|usage} It is merely an
+% example.  If this were a real macro, you would put a paragraph here
+% describing what the macro is supposed to do, what its mandatory and
+% optional arguments are, and so forth.
+%
+% \DescribeEnv{dummyEnv}
+% This environment does nothing.  It is merely an example.
+% If this were a real environment, you would put a paragraph here
+% describing what the environment is supposed to do, what its
+% mandatory and optional arguments are, and so forth.
+%
+%\StopEventually{^^A
+%  \PrintChanges
+%  \PrintIndex
+%}
+% \makeatletter
+% \section{Implementation}
+%
+%    \begin{macrocode}
+%<*package>
+\RequirePackage{xparse}
+\RequirePackage{tikz}
+\tikzset{
+  pics/carc/.style args={#1:#2:#3}{
+    code={
+      \draw[pic actions] (#1:#3) arc(#1:#2:#3);
+    }
+  }
+}
+%    \end{macrocode}
+% An internal helper macro to calculcate a dodecadent (like quadrant, but with twelve).
+%    \begin{macrocode}
+\def\tesseracont@dodec#1{{90+(30*(#1-1)}}
+%    \end{macrocode}
+% Representation of the number 1 in base tesseracont \tikz{\tesseracont@one}.
+%    \begin{macrocode}
+\NewDocumentCommand{\tesseracont@one}{}{%
+  \draw[white] (0,0) circle (0pt) pic[black]{%
+    carc=\tesseracont@dodec{2}:\tesseracont@dodec{7}:6pt};%
+  \draw[white] (0,0) circle (0pt) pic[black,line width={6pt*0.2}]{%
+    carc=\tesseracont@dodec{2}:\tesseracont@dodec{4}:{6pt*0.9}};%
+}
+%    \end{macrocode}
+% Representation of the number 2 in base tesseracont \tikz{\tesseracont@two}.
+%    \begin{macrocode}
+\NewDocumentCommand{\tesseracont@two}{}{%
+  \draw[white] (0,0) circle (0pt) pic[black]{carc=\tesseracont@dodec{7}:\tesseracont@dodec{2+12}:{6pt*0.5}};
+  \draw[white] (0,0) circle (0pt) pic[black,line width={6pt*0.2}]{carc=\tesseracont@dodec{7}:\tesseracont@dodec{10}:{6pt*0.4}};
+}
+%    \end{macrocode}
+% Representation of the number 3 in base tesseracont \tikz{\tesseracont@three}.
+%    \begin{macrocode}
+\NewDocumentCommand{\tesseracont@three}{}{%
+  \draw[white] (0,0) circle (0pt) pic[black]{carc=\tesseracont@dodec{3}:\tesseracont@dodec{11}:6pt};
+  \draw[white] (0,0) circle (0pt) pic[black,line width={6pt*0.2}]{carc=\tesseracont@dodec{3}:\tesseracont@dodec{6}:{6pt*0.9}};
+  \draw[white] (0,0) circle (0pt) pic[black,line width={6pt*0.2}]{carc=\tesseracont@dodec{8}:\tesseracont@dodec{11}:{6pt*0.9}};
+}
+%    \end{macrocode}
+% Representation of the number 4 in base tesseracont \tikz{\tesseracont@four}.
+%    \begin{macrocode}
+\NewDocumentCommand{\tesseracont@four}{}{
+  \draw[white] (0,0) circle (0pt) pic[black]{carc=\tesseracont@dodec{8}:\tesseracont@dodec{6+12}:6pt};
+  \draw[white] (0,0) circle (0pt) pic[black,line width={6pt*0.2}]{carc=\tesseracont@dodec{0}:\tesseracont@dodec{2}:{6pt*0.9}};
+}
+%    \end{macrocode}
+% Representation of the number 5 in base tesseracont \tikz{\tesseracont@five}.
+%    \begin{macrocode}
+\NewDocumentCommand{\tesseracont@five}{}{
+  \draw[black] (0,0) circle ({6pt*0.5});
+}
+%    \end{macrocode}
+% Representation of the number 10 in base tesseracont \tikz{\tesseracont@ten}.
+%    \begin{macrocode}
+\NewDocumentCommand{\tesseracont@ten}{}{
+  \draw[white] (0,0) circle (0pt) pic[black]{carc=\tesseracont@dodec{2}:\tesseracont@dodec{8}:6pt};
+  \draw[black] (0,0) -- ++(\tesseracont@dodec{2}:6pt);
+}
+%    \end{macrocode}
+% Representation of the number 15 in base tesseracont \tikz{\tesseracont@fifteen}.
+%    \begin{macrocode}
+\NewDocumentCommand{\tesseracont@fifteen}{}{
+  \draw[white] (0,0) circle (0pt) pic[black]{carc=0:180:6pt};
+  \draw[black] ({6pt*0.3},0) -- ++(0:{6pt*0.7});
+}
+%    \end{macrocode}
+%
+% \begin{environment}{dummyEnv}
+% This is a dummy environment.  If it did anything, we'd describe its
+% implementation here.
+%    \begin{macrocode}
+\newenvironment{dummyEnv}{%
+}{%
+%    \end{macrocode}
+% \changes{v1.00a}{2018/02/18}{Added a spurious change log entry to
+%   show what a change \emph{within} an environment definition looks
+%   like.}
+% Don't use |%| to introduce a code comment within a |macrocode|
+% environment.  Instead, you should typeset all of your comments with
+% LaTeX---doing so gives much prettier results.  For comments within a
+% macro/environment body, just do an |\end{macrocode}|, include some
+% commentary, and do another |\begin{macrocode}|.  It's that simple.
+%    \begin{macrocode}
+}
+%    \end{macrocode}
+% \end{environment}
+%
+%    \begin{macrocode}
+\endinput
+%</package>
+%    \end{macrocode}
+%\Finale
