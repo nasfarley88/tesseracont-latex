@@ -25,39 +25,44 @@
   }
 }
 \def\tesseracont@dodec#1{{90+(30*(#1-1)}}
+
 \NewDocumentCommand{\tesseracont@one}{}{%
   \draw[white] (0,0) circle (0pt) pic[black]{%
     carc=\tesseracont@dodec{2}:\tesseracont@dodec{7}:6pt};%
   \draw[white] (0,0) circle (0pt) pic[black,line width={6pt*0.2}]{%
     carc=\tesseracont@dodec{2}:\tesseracont@dodec{4}:{6pt*0.9}};%
 }
+
 \NewDocumentCommand{\tesseracont@two}{}{%
   \draw[white] (0,0) circle (0pt) pic[black]{carc=\tesseracont@dodec{7}:\tesseracont@dodec{2+12}:{6pt*0.5}};
   \draw[white] (0,0) circle (0pt) pic[black,line width={6pt*0.2}]{carc=\tesseracont@dodec{7}:\tesseracont@dodec{10}:{6pt*0.4}};
 }
+
 \NewDocumentCommand{\tesseracont@three}{}{%
   \draw[white] (0,0) circle (0pt) pic[black]{carc=\tesseracont@dodec{3}:\tesseracont@dodec{11}:6pt};
   \draw[white] (0,0) circle (0pt) pic[black,line width={6pt*0.2}]{carc=\tesseracont@dodec{3}:\tesseracont@dodec{6}:{6pt*0.9}};
   \draw[white] (0,0) circle (0pt) pic[black,line width={6pt*0.2}]{carc=\tesseracont@dodec{8}:\tesseracont@dodec{11}:{6pt*0.9}};
 }
+
 \NewDocumentCommand{\tesseracont@four}{}{
   \draw[white] (0,0) circle (0pt) pic[black]{carc=\tesseracont@dodec{8}:\tesseracont@dodec{6+12}:6pt};
   \draw[white] (0,0) circle (0pt) pic[black,line width={6pt*0.2}]{carc=\tesseracont@dodec{0}:\tesseracont@dodec{2}:{6pt*0.9}};
 }
+
 \NewDocumentCommand{\tesseracont@five}{}{
   \draw[black] (0,0) circle ({6pt*0.5});
 }
+
 \NewDocumentCommand{\tesseracont@ten}{}{
   \draw[white] (0,0) circle (0pt) pic[black]{carc=\tesseracont@dodec{2}:\tesseracont@dodec{8}:6pt};
   \draw[black] (0,0) -- ++(\tesseracont@dodec{2}:6pt);
 }
+
 \NewDocumentCommand{\tesseracont@fifteen}{}{
   \draw[white] (0,0) circle (0pt) pic[black]{carc=0:180:6pt};
   \draw[black] ({6pt*0.3},0) -- ++(0:{6pt*0.7});
 }
-\newenvironment{dummyEnv}{%
-}{%
-}
+
 %% 
 %% Copyright (C) 2018 by Nathanael Farley <nasfarley88@gmail.com>
 %% 
